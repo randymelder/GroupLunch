@@ -1,0 +1,196 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6254" systemVersion="14C109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="BYZ-38-t0r">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6247"/>
+    </dependencies>
+    <scenes>
+        <!--Group Lunch View Controller-->
+        <scene sceneID="tne-QT-ifu">
+            <objects>
+                <viewController id="BYZ-38-t0r" customClass="GroupLunchViewController" customModule="grouplunch" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
+                        <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bjB-Ks-Ocd">
+                                <rect key="frame" x="150" y="128" width="300" height="158"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Amount on Bill $" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fpM-Q8-JXd">
+                                        <rect key="frame" x="15" y="8" width="168" height="38"/>
+                                        <fontDescription key="fontDescription" name="CourierNewPS-BoldMT" family="Courier New" pointSize="15"/>
+                                        <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Qty of Payers :" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Z2m-aA-hn1">
+                                        <rect key="frame" x="15" y="54" width="168" height="38"/>
+                                        <fontDescription key="fontDescription" name="CourierNewPS-BoldMT" family="Courier New" pointSize="15"/>
+                                        <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <textField opaque="NO" clipsSubviews="YES" tag="111" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="9999.99" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="XWE-LC-sAX">
+                                        <rect key="frame" x="191" y="12" width="94" height="30"/>
+                                        <fontDescription key="fontDescription" name="CourierNewPS-BoldMT" family="Courier New" pointSize="16"/>
+                                        <textInputTraits key="textInputTraits"/>
+                                        <connections>
+                                            <action selector="doAmountChange:" destination="BYZ-38-t0r" eventType="editingDidEnd" id="gvd-uf-lhh"/>
+                                            <outlet property="delegate" destination="BYZ-38-t0r" id="rOk-XW-Gk4"/>
+                                        </connections>
+                                    </textField>
+                                    <stepper opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" maximumValue="100" translatesAutoresizingMaskIntoConstraints="NO" id="mzt-Vp-J2D">
+                                        <rect key="frame" x="191" y="58" width="94" height="29"/>
+                                        <connections>
+                                            <action selector="doQtyPayers:" destination="BYZ-38-t0r" eventType="valueChanged" id="uld-wR-zpD"/>
+                                        </connections>
+                                    </stepper>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" fixedFrame="YES" text="Tip  %" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2Er-6b-ehR">
+                                        <rect key="frame" x="15" y="100" width="168" height="38"/>
+                                        <fontDescription key="fontDescription" name="CourierNewPS-BoldMT" family="Courier New" pointSize="15"/>
+                                        <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <stepper opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" maximumValue="100" translatesAutoresizingMaskIntoConstraints="NO" id="xbx-0B-wDo">
+                                        <rect key="frame" x="191" y="104" width="94" height="29"/>
+                                        <connections>
+                                            <action selector="doTipChange:" destination="BYZ-38-t0r" eventType="valueChanged" id="DVU-3A-1Db"/>
+                                        </connections>
+                                    </stepper>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="158" id="iG2-X0-sYL"/>
+                                    <constraint firstAttribute="width" constant="300" id="z94-Fe-h7q"/>
+                                </constraints>
+                            </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fc9-HI-vAu">
+                                <rect key="frame" x="150" y="294" width="300" height="148"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Tip Total:   $" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fO5-Vm-GNT">
+                                        <rect key="frame" x="5" y="8" width="197" height="24"/>
+                                        <fontDescription key="fontDescription" name="CourierNewPS-BoldMT" family="Courier New" pointSize="17"/>
+                                        <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Pre Tip Each:   $" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MqV-ox-Tik">
+                                        <rect key="frame" x="5" y="40" width="197" height="24"/>
+                                        <fontDescription key="fontDescription" name="CourierNewPS-BoldMT" family="Courier New" pointSize="17"/>
+                                        <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="With Tip Each:   $" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gMt-gI-uWS">
+                                        <rect key="frame" x="5" y="72" width="197" height="24"/>
+                                        <fontDescription key="fontDescription" name="CourierNewPS-BoldMT" family="Courier New" pointSize="17"/>
+                                        <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Total Bill:   $" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="X5Q-Pl-dqg">
+                                        <rect key="frame" x="5" y="104" width="197" height="24"/>
+                                        <fontDescription key="fontDescription" name="CourierNewPS-BoldMT" family="Courier New" pointSize="17"/>
+                                        <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="9999.99" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="D6w-EN-cGa">
+                                        <rect key="frame" x="210" y="8" width="82" height="24"/>
+                                        <fontDescription key="fontDescription" name="CourierNewPS-BoldMT" family="Courier New" pointSize="17"/>
+                                        <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="9999.99" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Kda-Oz-I7V">
+                                        <rect key="frame" x="210" y="40" width="82" height="24"/>
+                                        <fontDescription key="fontDescription" name="CourierNewPS-BoldMT" family="Courier New" pointSize="17"/>
+                                        <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="9999.99" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="U2b-5N-fK6">
+                                        <rect key="frame" x="210" y="72" width="82" height="24"/>
+                                        <fontDescription key="fontDescription" name="CourierNewPS-BoldMT" family="Courier New" pointSize="17"/>
+                                        <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="9999.99" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GLp-Fz-9fC">
+                                        <rect key="frame" x="210" y="104" width="82" height="24"/>
+                                        <fontDescription key="fontDescription" name="CourierNewPS-BoldMT" family="Courier New" pointSize="17"/>
+                                        <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="148" id="IsN-2b-DvF"/>
+                                    <constraint firstAttribute="width" constant="300" id="RdE-hi-VSi"/>
+                                </constraints>
+                            </view>
+                            <imageView multipleTouchEnabled="YES" tag="444" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logo_20150214.png" translatesAutoresizingMaskIntoConstraints="NO" id="I2g-Pj-iUx">
+                                <rect key="frame" x="150" y="20" width="300" height="100"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="v" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0Gi-Qo-sAI">
+                                <rect key="frame" x="16" y="571" width="250" height="21"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="21" id="P4a-gF-kVm"/>
+                                    <constraint firstAttribute="width" constant="250" id="oLt-TQ-lSa"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="12"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="fc9-HI-vAu" firstAttribute="top" secondItem="bjB-Ks-Ocd" secondAttribute="bottom" constant="8" id="1gx-vX-mnu"/>
+                            <constraint firstItem="I2g-Pj-iUx" firstAttribute="trailing" secondItem="fc9-HI-vAu" secondAttribute="trailing" id="2bt-EP-43a"/>
+                            <constraint firstItem="I2g-Pj-iUx" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" id="6GQ-1d-lXj"/>
+                            <constraint firstAttribute="centerX" secondItem="fc9-HI-vAu" secondAttribute="centerX" id="6yw-Nq-6fn"/>
+                            <constraint firstItem="fc9-HI-vAu" firstAttribute="top" secondItem="bjB-Ks-Ocd" secondAttribute="bottom" constant="8" id="FIV-Yw-PCC"/>
+                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="0Gi-Qo-sAI" secondAttribute="bottom" constant="8" id="cLX-Jx-01g"/>
+                            <constraint firstAttribute="centerX" secondItem="bjB-Ks-Ocd" secondAttribute="centerX" id="esl-wX-bew"/>
+                            <constraint firstItem="I2g-Pj-iUx" firstAttribute="trailing" secondItem="bjB-Ks-Ocd" secondAttribute="trailing" id="jzs-tg-rQe"/>
+                            <constraint firstItem="I2g-Pj-iUx" firstAttribute="leading" secondItem="fc9-HI-vAu" secondAttribute="leading" id="kr2-ac-XqF"/>
+                            <constraint firstItem="bjB-Ks-Ocd" firstAttribute="top" secondItem="I2g-Pj-iUx" secondAttribute="bottom" constant="8" id="oSw-jZ-aAH"/>
+                            <constraint firstItem="I2g-Pj-iUx" firstAttribute="leading" secondItem="bjB-Ks-Ocd" secondAttribute="leading" id="rIW-6y-WAH"/>
+                            <constraint firstItem="0Gi-Qo-sAI" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" constant="16" id="wv3-Oj-6dE"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="appversionLabel" destination="0Gi-Qo-sAI" id="IEY-pR-WSq"/>
+                        <outlet property="labelAmountPreTipEach" destination="Kda-Oz-I7V" id="Qm6-wN-H3U"/>
+                        <outlet property="labelAmountTipTotal" destination="D6w-EN-cGa" id="bKK-tp-fuo"/>
+                        <outlet property="labelAmountTotalBill" destination="GLp-Fz-9fC" id="4ea-vW-WhP"/>
+                        <outlet property="labelAmountWithTipEach" destination="U2b-5N-fK6" id="GLe-vs-3DG"/>
+                        <outlet property="labelQtyPayers" destination="Z2m-aA-hn1" id="FiE-lD-c3e"/>
+                        <outlet property="labelTipPct" destination="2Er-6b-ehR" id="FDD-rz-AvG"/>
+                        <outlet property="stepperPayers" destination="mzt-Vp-J2D" id="Net-FR-CJw"/>
+                        <outlet property="stepperTip" destination="xbx-0B-wDo" id="4rD-NY-HxD"/>
+                        <outlet property="textFieldAmountOnBill" destination="XWE-LC-sAX" id="ihm-Ns-Cea"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="340" y="366"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="szF-YZ-cid">
+            <objects>
+                <viewController automaticallyAdjustsScrollViewInsets="NO" id="XdJ-Tw-DeV" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="Dz6-AR-cTm"/>
+                        <viewControllerLayoutGuide type="bottom" id="gf9-kz-ciT"/>
+                    </layoutGuides>
+                    <view key="view" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="yZg-Xi-Pat">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <toolbarItems/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="zaC-5U-hIW" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="logo_20150214.png" width="517" height="100"/>
+    </resources>
+</document>
