@@ -137,6 +137,16 @@
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <adBannerView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" translatesAutoresizingMaskIntoConstraints="NO" id="GOM-fK-xHK">
+                                <rect key="frame" x="140" y="450" width="320" height="50"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="983-gm-ObY"/>
+                                    <constraint firstAttribute="width" constant="320" id="I9E-cj-BFa"/>
+                                </constraints>
+                                <connections>
+                                    <outlet property="delegate" destination="BYZ-38-t0r" id="DMf-9V-MuT"/>
+                                </connections>
+                            </adBannerView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
@@ -145,6 +155,7 @@
                             <constraint firstItem="I2g-Pj-iUx" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" id="6GQ-1d-lXj"/>
                             <constraint firstAttribute="centerX" secondItem="fc9-HI-vAu" secondAttribute="centerX" id="6yw-Nq-6fn"/>
                             <constraint firstItem="fc9-HI-vAu" firstAttribute="top" secondItem="bjB-Ks-Ocd" secondAttribute="bottom" constant="8" id="FIV-Yw-PCC"/>
+                            <constraint firstAttribute="centerX" secondItem="GOM-fK-xHK" secondAttribute="centerX" id="NTh-TW-ERY"/>
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="0Gi-Qo-sAI" secondAttribute="bottom" constant="8" id="cLX-Jx-01g"/>
                             <constraint firstAttribute="centerX" secondItem="bjB-Ks-Ocd" secondAttribute="centerX" id="esl-wX-bew"/>
                             <constraint firstItem="I2g-Pj-iUx" firstAttribute="trailing" secondItem="bjB-Ks-Ocd" secondAttribute="trailing" id="jzs-tg-rQe"/>
@@ -152,9 +163,11 @@
                             <constraint firstItem="bjB-Ks-Ocd" firstAttribute="top" secondItem="I2g-Pj-iUx" secondAttribute="bottom" constant="8" id="oSw-jZ-aAH"/>
                             <constraint firstItem="I2g-Pj-iUx" firstAttribute="leading" secondItem="bjB-Ks-Ocd" secondAttribute="leading" id="rIW-6y-WAH"/>
                             <constraint firstItem="0Gi-Qo-sAI" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" constant="16" id="wv3-Oj-6dE"/>
+                            <constraint firstItem="GOM-fK-xHK" firstAttribute="top" secondItem="fc9-HI-vAu" secondAttribute="bottom" constant="8" id="xRX-Xp-ntR"/>
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="adBanner" destination="GOM-fK-xHK" id="bsb-sO-7cC"/>
                         <outlet property="appversionLabel" destination="0Gi-Qo-sAI" id="IEY-pR-WSq"/>
                         <outlet property="labelAmountPreTipEach" destination="Kda-Oz-I7V" id="Qm6-wN-H3U"/>
                         <outlet property="labelAmountTipTotal" destination="D6w-EN-cGa" id="bKK-tp-fuo"/>

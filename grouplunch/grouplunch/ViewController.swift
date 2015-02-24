@@ -7,12 +7,14 @@
 //
 
 import UIKit
+import iAd
 
-class GroupLunchViewController: UIViewController, UITextFieldDelegate {
+class GroupLunchViewController: UIViewController, UITextFieldDelegate, ADBannerViewDelegate {
     
     let DEFAULT_LABEL_AMT           = "0.00"
     let DEFAULT_LABEL_PAYERS        = "Qty of Payers"
     let DEFAULT_LABEL_TIP           = "Tip"
+    let DEFAULT_TIP_PCT             = 20.0
     let MINIMUM_PAYERS              = 1
     let MINIMUM_TIP_PCT             = 0
     let MINIMUM_BILL_AMT            = 0.0
@@ -42,6 +44,8 @@ class GroupLunchViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var textFieldAmountOnBill: UITextField!
     
     @IBOutlet weak var appversionLabel: UILabel!
+    
+    @IBOutlet weak var adBanner: ADBannerView!
     
     // --------------- UI Actions -------------- //
     @IBAction func doAmountChange(sender: UITextField) {
@@ -109,7 +113,7 @@ class GroupLunchViewController: UIViewController, UITextFieldDelegate {
         self.labelTipPct.text               = NSString(format: "%@ %d%%", self.DEFAULT_LABEL_TIP, self.pct_tip)
         
         self.stepperPayers.value            = 1
-        self.stepperTip.value               = 0
+        self.stepperTip.value               = DEFAULT_TIP_PCT
     }
     
     // --------------- Delegates ---------------- //
@@ -140,6 +144,21 @@ class GroupLunchViewController: UIViewController, UITextFieldDelegate {
         return true
     }
     
+    func bannerViewWillLoadAd(banner: ADBannerView!) {
+        println("\(__FUNCTION__)")
+    }
+    
+    func bannerViewDidLoadAd(banner: ADBannerView!) {
+        println("\(__FUNCTION__)")
+        self.adBanner.hidden = false
+    }
+    
+    func bannerView(banner: ADBannerView!, didFailToReceiveAdWithError error: NSError!) {
+        println("\(__FUNCTION__)")
+        println("Ad failed with error: %s", error.description)
+        self.adBanner.hidden = true
+    }
+    
     // --------------- Built Ins ---------------- //
     override func touchesBegan(touches: NSSet, withEvent event: UIEvent) {
         self.view.endEditing(true)
@@ -160,7 +179,10 @@ class GroupLunchViewController: UIViewController, UITextFieldDelegate {
         let appversion              = NSBundle.mainBundle().objectForInfoDictionaryKey(kCFBundleVersionKey as NSString) as String
         self.appversionLabel.text   = appversion
         
-        
+        // Banner
+        self.canDisplayBannerAds    = true
+        self.adBanner.delegate      = self
+        self.adBanner.hidden        = true
     }
 
     override func didReceiveMemoryWarning() {
