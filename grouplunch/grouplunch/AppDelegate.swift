@@ -12,7 +12,7 @@
 // v2.6.1 - (TO DO) GPS + Map image ??
 
 // MARK: ---------- Released: -------------
-// v2.3.1 - (TO DO) Support link, credits
+// v2.3.1 - Support email, credits
 // v2.2.1 - Friendly defaults
 // v2.1.1 - iAds
 // v2.0.1 - Swift redo
