@@ -7,11 +7,11 @@
 //
 
 // MARK: ---------- Roadmap: --------------
-// v2.4.1 - (TO DO) Email integration
 // v2.5.1 - (TO DO) Add Photo to email
 // v2.6.1 - (TO DO) GPS + Map image ??
 
 // MARK: ---------- Released: -------------
+// v2.4.1 - Email integration
 // v2.3.1 - Support email, credits
 // v2.2.1 - Friendly defaults
 // v2.1.1 - iAds

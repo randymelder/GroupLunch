@@ -12,7 +12,7 @@ import MessageUI
 class SupportViewController: UIViewController, MFMailComposeViewControllerDelegate {
     
     let EMAIL_SUPPORT       = "grouplunch@spininternetmedia.com" as String
-    var EMAIL_SUPPORT_SUBJ  = "GroupLunch Suggestion" as String
+    var EMAIL_SUPPORT_SUBJ  = "GroupLunch™ App Suggestion" as String
     let app                 = UIApplication.sharedApplication().delegate as AppDelegate
 
     

@@ -8,8 +8,9 @@
 
 import UIKit
 import iAd
+import MessageUI
 
-class GroupLunchViewController: UIViewController, UITextFieldDelegate, ADBannerViewDelegate {
+class GroupLunchViewController: UIViewController, UITextFieldDelegate, ADBannerViewDelegate, MFMailComposeViewControllerDelegate  {
     
     let DEFAULT_LABEL_AMT           = "0.00"
     let DEFAULT_LABEL_PAYERS        = "Qty of Payers"
@@ -27,6 +28,14 @@ class GroupLunchViewController: UIViewController, UITextFieldDelegate, ADBannerV
     var pct_tip:Int                 = 0
     var bill_amount:Double          = 0.0
     var app:AppDelegate             = UIApplication.sharedApplication().delegate as AppDelegate
+    var EMAIL_SUPPORT_SUBJ          = "Our Lunch bill by GroupLunch™ iOS App" as String
+    
+    var amtTipTotal:Double      = 0.0
+    var amtJustTipEach:Double   = 0.0
+    var amtPreTipEach:Double    = 0.0
+    var amtWithTipEach:Double   = 0.0
+    var amtTotalBill:Double     = 0.0
+    
     
     // --------------- UI Outlets -------------- //
     @IBOutlet weak var stepperPayers: UIStepper!
@@ -51,7 +60,40 @@ class GroupLunchViewController: UIViewController, UITextFieldDelegate, ADBannerV
     
     @IBOutlet weak var adBanner: ADBannerView!
     
+    
+    
+    
+    // MARK: ------------- Email -----------------
+    func configuredMailComposeViewController() -> MFMailComposeViewController {
+        let mailComposerVC  = MFMailComposeViewController()
+        mailComposerVC.mailComposeDelegate = self // Extremely important to set the --mailComposeDelegate-- property, NOT the --delegate-- property
+        mailComposerVC.setSubject("\(self.EMAIL_SUPPORT_SUBJ)")
+        mailComposerVC.setMessageBody(self.getEmailHTML(), isHTML: true)
+        return mailComposerVC
+    }
+    
+    func showSendMailErrorAlert() {
+        self.app.printLogMessage("Device cannot send email")
+        let sendMailErrorAlert = UIAlertView(title: "No Email??", message: "Your device appears to not have an email account configured. Please add an account.", delegate: self, cancelButtonTitle: "OK")
+        sendMailErrorAlert.show()
+    }
+    
+    func mailComposeController(controller: MFMailComposeViewController!, didFinishWithResult result: MFMailComposeResult, error: NSError!) {
+        if (nil != error) {
+            self.app.printLogMessage(error.description)
+        }
+        self.dismissViewControllerAnimated(true, completion: nil)
+    }
+    
     // MARK: --------------- UI Actions --------------
+    @IBAction func doEmailButton(sender: AnyObject) {
+        let mailComposeViewController = configuredMailComposeViewController()
+        if MFMailComposeViewController.canSendMail() {
+            self.presentViewController(mailComposeViewController, animated: true, completion: nil)
+        } else {
+            self.showSendMailErrorAlert()
+        }
+    }
     @IBAction func doAmountChange(sender: UITextField) {
         if (self.DEBUG_ON) { app.printLogLine("\(__FUNCTION__)", fileName: "\(__FILE__)", lineNumber: (__LINE__)) }
     }
@@ -92,16 +134,16 @@ class GroupLunchViewController: UIViewController, UITextFieldDelegate, ADBannerV
     func doCalculateAmounts() {
         if (self.DEBUG_ON) { app.printLogLine("\(__FUNCTION__)", fileName: "\(__FILE__)", lineNumber: (__LINE__)) }
         
-        var amtTipTotal:Double      = self.bill_amount * (Double(self.pct_tip) / 100);
-        var amtJustTipEach:Double   = amtTipTotal / Double(self.qty_payers)
-        var amtPreTipEach:Double    = self.bill_amount / Double(self.qty_payers)
-        var amtWithTipEach:Double   = amtJustTipEach + amtPreTipEach
-        var amtTotalBill:Double     = amtTipTotal + self.bill_amount
+        self.amtTipTotal      = self.bill_amount * (Double(self.pct_tip) / 100);
+        self.amtJustTipEach   = amtTipTotal / Double(self.qty_payers)
+        self.amtPreTipEach    = self.bill_amount / Double(self.qty_payers)
+        self.amtWithTipEach   = amtJustTipEach + amtPreTipEach
+        self.amtTotalBill     = amtTipTotal + self.bill_amount
         
-        self.labelAmountTipTotal.text   = NSString(format: "%.2lf", amtTipTotal)
-        self.labelAmountPreTipEach.text = NSString(format: "%.2lf", amtPreTipEach)
-        self.labelAmountWithTipEach.text = NSString(format: "%.2lf", amtWithTipEach)
-        self.labelAmountTotalBill.text = NSString(format: "%.2lf", amtTotalBill)
+        self.labelAmountTipTotal.text       = NSString(format: "%.2lf", self.amtTipTotal)
+        self.labelAmountPreTipEach.text     = NSString(format: "%.2lf", self.amtPreTipEach)
+        self.labelAmountWithTipEach.text    = NSString(format: "%.2lf", self.amtWithTipEach)
+        self.labelAmountTotalBill.text      = NSString(format: "%.2lf", self.amtTotalBill)
         
     }
     
@@ -123,6 +165,21 @@ class GroupLunchViewController: UIViewController, UITextFieldDelegate, ADBannerV
         self.stepperPayers.value            = 1
         self.stepperTip.value               = DEFAULT_TIP_PCT
     }
+    
+    func getEmailHTML() -> String {
+        let html = " <p><img alt=\"\" src=\"http://cdn.spininternetmedia.com/spininternetmedia.com/grouplunchapp/logo_20150214.png\" style=\"border-width: 0px; border-style: solid; margin: 2px; width: 200px; height: 39px;\"/></p><p>Lunch Bill Breakdown</p><table border=\"0\" cellpadding=\"1\" cellspacing=\"1\" style=\"width: 350px;\"><tbody><tr><td style=\"text-align: right;\" width=\"50%\">Amount on Bill:</td><td width=\"50%\">$[[AMOUNT_ON_BILL]]</td></tr><tr><td style=\"text-align: right;\">Qty of Payers:&nbsp;</td><td>[[QTY_PAYERS]]</td></tr><tr><td style=\"text-align: right;\">Tip %:&nbsp;</td><td>[[TIP_PCT]]</td></tr><tr><td style=\"text-align: right;\">Tip Total:</td><td>$[[TIP_TOTAL]]</td></tr><tr><td style=\"text-align: right;\">Pre Tip Each:</td><td>$[[PRE_TIP_EACH]]</td></tr><tr><td style=\"text-align: right;\">With Tip Each:</td><td>$[[WITH_TIP_EACH]]</td></tr><tr><td style=\"text-align: right;\">Total Bill:&nbsp;</td><td>$[[TOTAL_BILL]]</td></tr></tbody></table><h2>Group Lunch&trade; for iOS</h2><p><a href=\"itmss://itunes.apple.com/us/app/group-lunch/id406438527\" target=\"_blank\"><img alt=\"Download Group Lunch at the App Store\" border=\"0\" src=\"http://spininternetmedia.com/wp-content/uploads/2013/11/Download_on_the_App_Store_Badge_US-UK_135x40.png\" style=\"margin: 2px; width: 135px; height: 40px; border:0;\"/></a></p><p>&quot;Group Lunch&quot; is a trademark of RCM Software, LLC</p>"
+        
+        let html1 = html.stringByReplacingOccurrencesOfString("[[AMOUNT_ON_BILL]]", withString: self.textFieldAmountOnBill.text, options: NSStringCompareOptions.LiteralSearch, range: nil)
+        let html2 = html1.stringByReplacingOccurrencesOfString("[[QTY_PAYERS]]", withString: String(self.qty_payers), options: NSStringCompareOptions.LiteralSearch, range: nil)
+        let html3 = html2.stringByReplacingOccurrencesOfString("[[TIP_PCT]]", withString: String(self.pct_tip), options: NSStringCompareOptions.LiteralSearch, range: nil)
+        let html4 = html3.stringByReplacingOccurrencesOfString("[[TIP_TOTAL]]", withString: String(format:"%.2f", self.amtTipTotal), options: NSStringCompareOptions.LiteralSearch, range: nil)
+        let html5 = html4.stringByReplacingOccurrencesOfString("[[PRE_TIP_EACH]]", withString: String(format:"%.2f", self.amtPreTipEach), options: NSStringCompareOptions.LiteralSearch, range: nil)
+        let html6 = html5.stringByReplacingOccurrencesOfString("[[WITH_TIP_EACH]]", withString: String(format:"%.2f", self.amtWithTipEach), options: NSStringCompareOptions.LiteralSearch, range: nil)
+        let html7 = html6.stringByReplacingOccurrencesOfString("[[TOTAL_BILL]]", withString: String(format:"%.2f", self.amtTotalBill), options: NSStringCompareOptions.LiteralSearch, range: nil)
+        
+        return html7
+    }
+    
 
     // MARK: --------------- Delegates ----------------
     func textFieldDidBeginEditing(textField: UITextField) {
