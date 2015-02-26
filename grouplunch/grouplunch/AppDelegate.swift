@@ -6,6 +6,17 @@
 //  Copyright (c) 2015 RCM Software, LLC. All rights reserved.
 //
 
+// MARK: ---------- Roadmap: --------------
+// v2.4.1 - (TO DO) Email integration
+// v2.5.1 - (TO DO) Add Photo to email
+// v2.6.1 - (TO DO) GPS + Map image ??
+
+// MARK: ---------- Released: -------------
+// v2.3.1 - (TO DO) Support link, credits
+// v2.2.1 - Friendly defaults
+// v2.1.1 - iAds
+// v2.0.1 - Swift redo
+
 import UIKit
 
 @UIApplicationMain
@@ -13,9 +24,41 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
 
+// MARK: --------------- COMMON -----------------
+    func printLogLine (functionName: String, fileName: String, lineNumber: Int) -> Void {
+        let version = self.getAppMinorVersion()
+        let appname = self.getAppName()
+        self.printLogMessage("- File: \t\t\(fileName) \n- Function: \t\(functionName)() at line: \(lineNumber)")
+    }
+    
+    func printLogMessage (message: String) {
+        println("--- \(self.getAppName()) \(self.getAppMinorVersion()):\n\(message)")
+    }
+    
+    func getAppMinorVersion () -> String {
+        let appInfo = NSBundle.mainBundle().infoDictionary as Dictionary<String,AnyObject>
+        return appInfo["CFBundleVersion"] as String
+    }
+    
+    func getAppMajorVersion () -> String {
+        let appInfo = NSBundle.mainBundle().infoDictionary as Dictionary<String,AnyObject>
+        return appInfo["CFBundleShortVersionString"] as String
+    }
+    
+    func getAppName() -> String {
+        let appInfo = NSBundle.mainBundle().infoDictionary as Dictionary<String,AnyObject>
+        return appInfo["CFBundleName"] as String
+    }
 
+    
+// MARK: --------------- BUILT INs -----------------
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         // Override point for customization after application launch.
+        
+        self.printLogMessage("Launching app.")
+        self.printLogLine("\(__FUNCTION__)", fileName: "\(__FILE__)", lineNumber: __LINE__)
+        
+        
         return true
     }
 

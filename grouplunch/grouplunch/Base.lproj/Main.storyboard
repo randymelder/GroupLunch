@@ -2,6 +2,7 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6254" systemVersion="14C109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="BYZ-38-t0r">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6247"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
         <!--Group Lunch View Controller-->
@@ -178,16 +179,17 @@
                         <outlet property="stepperPayers" destination="mzt-Vp-J2D" id="Net-FR-CJw"/>
                         <outlet property="stepperTip" destination="xbx-0B-wDo" id="4rD-NY-HxD"/>
                         <outlet property="textFieldAmountOnBill" destination="XWE-LC-sAX" id="ihm-Ns-Cea"/>
+                        <segue destination="XdJ-Tw-DeV" kind="presentation" identifier="supportSegue" modalPresentationStyle="formSheet" modalTransitionStyle="flipHorizontal" id="Rch-M5-fR1"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="340" y="366"/>
         </scene>
-        <!--View Controller-->
+        <!--Support View Controller-->
         <scene sceneID="szF-YZ-cid">
             <objects>
-                <viewController automaticallyAdjustsScrollViewInsets="NO" id="XdJ-Tw-DeV" sceneMemberID="viewController">
+                <viewController automaticallyAdjustsScrollViewInsets="NO" id="XdJ-Tw-DeV" customClass="SupportViewController" customModule="grouplunch" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="Dz6-AR-cTm"/>
                         <viewControllerLayoutGuide type="bottom" id="gf9-kz-ciT"/>
@@ -195,12 +197,87 @@
                     <view key="view" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="yZg-Xi-Pat">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView multipleTouchEnabled="YES" tag="444" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logo_20150214.png" translatesAutoresizingMaskIntoConstraints="NO" id="MeA-Xl-31Y">
+                                <rect key="frame" x="16" y="28" width="163" height="54"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="163" id="4Nr-Re-Ol2"/>
+                                    <constraint firstAttribute="height" constant="54" id="I27-ed-DGc"/>
+                                </constraints>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="GroupLunch™ by SPiN Internet Media - A division of RCM Software, LLC. Code, artwork by Randy Melder" lineBreakMode="tailTruncation" numberOfLines="5" baselineAdjustment="alignBaselines" minimumFontSize="6" translatesAutoresizingMaskIntoConstraints="NO" id="pEw-lv-r6T">
+                                <rect key="frame" x="187" y="28" width="397" height="76.5"/>
+                                <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="12"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dzw-fo-szt">
+                                <rect key="frame" x="255" y="558" width="90" height="34"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="90" id="eey-pC-j9o"/>
+                                    <constraint firstAttribute="height" constant="34" id="mAb-hn-zmu"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="22"/>
+                                <state key="normal" title="Close">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="doCloseButton:" destination="XdJ-Tw-DeV" eventType="touchUpInside" id="AJb-ix-lSD"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="E1g-qa-fLl">
+                                <rect key="frame" x="136" y="200" width="328" height="62"/>
+                                <color key="backgroundColor" red="0.89285432450000002" green="0.68707157109999994" blue="0.26080437989999999" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="62" id="JzS-Sy-w1Z"/>
+                                    <constraint firstAttribute="width" constant="328" id="nFI-0v-iul"/>
+                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="62" id="r8h-Eu-5OP"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="24"/>
+                                <state key="normal" title="Send Us A Suggestion">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="doSuggestionButton:" destination="XdJ-Tw-DeV" eventType="touchUpInside" id="npD-Oh-1dv"/>
+                                </connections>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="v" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="REj-pD-zcg">
+                                <rect key="frame" x="16" y="90" width="163" height="14"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="14" id="Ad9-uu-Ff1"/>
+                                    <constraint firstAttribute="width" constant="163" id="DRc-CE-Gez"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="11"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="REj-pD-zcg" firstAttribute="leading" secondItem="yZg-Xi-Pat" secondAttribute="leadingMargin" id="0NE-cN-8cu"/>
+                            <constraint firstAttribute="centerX" secondItem="E1g-qa-fLl" secondAttribute="centerX" id="0yb-ql-yPe"/>
+                            <constraint firstItem="E1g-qa-fLl" firstAttribute="top" secondItem="yZg-Xi-Pat" secondAttribute="top" constant="200" id="8vq-yl-CzQ"/>
+                            <constraint firstItem="REj-pD-zcg" firstAttribute="top" secondItem="MeA-Xl-31Y" secondAttribute="bottom" constant="8" id="FXU-ui-6C7"/>
+                            <constraint firstItem="dzw-fo-szt" firstAttribute="centerX" secondItem="yZg-Xi-Pat" secondAttribute="centerX" id="LNd-zj-hJu"/>
+                            <constraint firstItem="pEw-lv-r6T" firstAttribute="top" secondItem="Dz6-AR-cTm" secondAttribute="bottom" constant="28" id="OTv-R3-658"/>
+                            <constraint firstItem="E1g-qa-fLl" firstAttribute="top" secondItem="pEw-lv-r6T" secondAttribute="bottom" constant="95.5" id="QKE-9p-hCL"/>
+                            <constraint firstItem="gf9-kz-ciT" firstAttribute="top" secondItem="dzw-fo-szt" secondAttribute="bottom" constant="8" symbolic="YES" id="ULn-KQ-cxs"/>
+                            <constraint firstItem="pEw-lv-r6T" firstAttribute="leading" secondItem="REj-pD-zcg" secondAttribute="trailing" constant="8" id="ZCm-Nv-AJY"/>
+                            <constraint firstItem="pEw-lv-r6T" firstAttribute="trailing" secondItem="yZg-Xi-Pat" secondAttribute="trailingMargin" id="a5H-pY-ShN"/>
+                            <constraint firstItem="MeA-Xl-31Y" firstAttribute="top" secondItem="Dz6-AR-cTm" secondAttribute="bottom" constant="28" id="eVa-n5-MKf"/>
+                            <constraint firstItem="MeA-Xl-31Y" firstAttribute="leading" secondItem="yZg-Xi-Pat" secondAttribute="leadingMargin" id="n7z-o8-eaK"/>
+                        </constraints>
                     </view>
                     <toolbarItems/>
+                    <connections>
+                        <outlet property="versionLabel" destination="REj-pD-zcg" id="qVL-zT-VJJ"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="zaC-5U-hIW" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
+            <point key="canvasLocation" x="340" y="-341"/>
         </scene>
     </scenes>
     <resources>

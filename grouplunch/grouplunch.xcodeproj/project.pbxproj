@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		A38123D21A92999200D0C4C6 /* iAd.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A38123D11A92999200D0C4C6 /* iAd.framework */; };
 		A3AEA73C1A8FE6F900B358B6 /* logo_20150214.png in Resources */ = {isa = PBXBuildFile; fileRef = A3AEA73B1A8FE6F900B358B6 /* logo_20150214.png */; };
+		A3BA41CC1A9CB6E5001DF4EF /* SupportViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3BA41CB1A9CB6E5001DF4EF /* SupportViewController.swift */; };
+		A3BA41CE1A9CBA3E001DF4EF /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A3BA41CD1A9CBA3E001DF4EF /* MessageUI.framework */; };
 		A3D260871A7BCD57009D5FBB /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3D260861A7BCD57009D5FBB /* AppDelegate.swift */; };
 		A3D260891A7BCD57009D5FBB /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3D260881A7BCD57009D5FBB /* ViewController.swift */; };
 		A3D2608C1A7BCD57009D5FBB /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A3D2608A1A7BCD57009D5FBB /* Main.storyboard */; };
@@ -30,6 +32,8 @@
 /* Begin PBXFileReference section */
 		A38123D11A92999200D0C4C6 /* iAd.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = iAd.framework; path = System/Library/Frameworks/iAd.framework; sourceTree = SDKROOT; };
 		A3AEA73B1A8FE6F900B358B6 /* logo_20150214.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = logo_20150214.png; sourceTree = "<group>"; };
+		A3BA41CB1A9CB6E5001DF4EF /* SupportViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SupportViewController.swift; sourceTree = "<group>"; };
+		A3BA41CD1A9CBA3E001DF4EF /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
 		A3D260811A7BCD57009D5FBB /* grouplunch.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = grouplunch.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A3D260851A7BCD57009D5FBB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A3D260861A7BCD57009D5FBB /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -47,6 +51,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A3BA41CE1A9CBA3E001DF4EF /* MessageUI.framework in Frameworks */,
 				A38123D21A92999200D0C4C6 /* iAd.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -64,6 +69,7 @@
 		A3D260781A7BCD57009D5FBB = {
 			isa = PBXGroup;
 			children = (
+				A3BA41CD1A9CBA3E001DF4EF /* MessageUI.framework */,
 				A38123D11A92999200D0C4C6 /* iAd.framework */,
 				A3D260831A7BCD57009D5FBB /* grouplunch */,
 				A3D260991A7BCD57009D5FBB /* grouplunchTests */,
@@ -90,6 +96,7 @@
 				A3D2608D1A7BCD57009D5FBB /* Images.xcassets */,
 				A3D2608F1A7BCD57009D5FBB /* LaunchScreen.xib */,
 				A3D260841A7BCD57009D5FBB /* Supporting Files */,
+				A3BA41CB1A9CB6E5001DF4EF /* SupportViewController.swift */,
 			);
 			path = grouplunch;
 			sourceTree = "<group>";
@@ -223,6 +230,7 @@
 			files = (
 				A3D260891A7BCD57009D5FBB /* ViewController.swift in Sources */,
 				A3D260871A7BCD57009D5FBB /* AppDelegate.swift in Sources */,
+				A3BA41CC1A9CB6E5001DF4EF /* SupportViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

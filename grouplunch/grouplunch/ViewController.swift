@@ -14,15 +14,19 @@ class GroupLunchViewController: UIViewController, UITextFieldDelegate, ADBannerV
     let DEFAULT_LABEL_AMT           = "0.00"
     let DEFAULT_LABEL_PAYERS        = "Qty of Payers"
     let DEFAULT_LABEL_TIP           = "Tip"
-    let DEFAULT_TIP_PCT             = 20.0
+    let DEFAULT_TIP_PCT             = 15.0
     let MINIMUM_PAYERS              = 1
     let MINIMUM_TIP_PCT             = 0
     let MINIMUM_BILL_AMT            = 0.0
     let TEXTFIELD_TAG_BILL_AMT      = 111
+    let DEBUG_ON                    = false
+    let SEGUE_ID_SUPPORT            = "supportSegue"
+    let TAG_IMAGE_LOGO              = 444
     
     var qty_payers:Int              = 1
     var pct_tip:Int                 = 0
     var bill_amount:Double          = 0.0
+    var app:AppDelegate             = UIApplication.sharedApplication().delegate as AppDelegate
     
     // --------------- UI Outlets -------------- //
     @IBOutlet weak var stepperPayers: UIStepper!
@@ -47,12 +51,12 @@ class GroupLunchViewController: UIViewController, UITextFieldDelegate, ADBannerV
     
     @IBOutlet weak var adBanner: ADBannerView!
     
-    // --------------- UI Actions -------------- //
+    // MARK: --------------- UI Actions --------------
     @IBAction func doAmountChange(sender: UITextField) {
-        println("\(__FUNCTION__)")
+        if (self.DEBUG_ON) { app.printLogLine("\(__FUNCTION__)", fileName: "\(__FILE__)", lineNumber: (__LINE__)) }
     }
     @IBAction func doQtyPayers(sender: UIStepper) {
-        println("\(__FUNCTION__)")
+        if (self.DEBUG_ON) { app.printLogLine("\(__FUNCTION__)", fileName: "\(__FILE__)", lineNumber: (__LINE__)) }
         var value:Int = Int(sender.value)
         self.view.endEditing(true)
         
@@ -69,7 +73,7 @@ class GroupLunchViewController: UIViewController, UITextFieldDelegate, ADBannerV
     }
     
     @IBAction func doTipChange(sender: UIStepper) {
-        println("\(__FUNCTION__)")
+        if (self.DEBUG_ON) { app.printLogLine("\(__FUNCTION__)", fileName: "\(__FILE__)", lineNumber: (__LINE__)) }
         var value:Int = Int(sender.value)
         self.view.endEditing(true)
         
@@ -86,7 +90,7 @@ class GroupLunchViewController: UIViewController, UITextFieldDelegate, ADBannerV
     }
     
     func doCalculateAmounts() {
-        println("\(__FUNCTION__)")
+        if (self.DEBUG_ON) { app.printLogLine("\(__FUNCTION__)", fileName: "\(__FILE__)", lineNumber: (__LINE__)) }
         
         var amtTipTotal:Double      = self.bill_amount * (Double(self.pct_tip) / 100);
         var amtJustTipEach:Double   = amtTipTotal / Double(self.qty_payers)
@@ -101,8 +105,12 @@ class GroupLunchViewController: UIViewController, UITextFieldDelegate, ADBannerV
         
     }
     
+    // MARK: -------------- Initial UI SETUP
     func doSetInitialValues() {
-        println("\(__FUNCTION__)")
+        if (self.DEBUG_ON) { app.printLogLine("\(__FUNCTION__)", fileName: "\(__FILE__)", lineNumber: (__LINE__)) }
+        
+        self.pct_tip                        = Int(DEFAULT_TIP_PCT)
+        
         self.labelAmountTipTotal.text       = self.DEFAULT_LABEL_AMT
         self.labelAmountPreTipEach.text     = self.DEFAULT_LABEL_AMT
         self.labelAmountWithTipEach.text    = self.DEFAULT_LABEL_AMT
@@ -115,16 +123,16 @@ class GroupLunchViewController: UIViewController, UITextFieldDelegate, ADBannerV
         self.stepperPayers.value            = 1
         self.stepperTip.value               = DEFAULT_TIP_PCT
     }
-    
-    // --------------- Delegates ---------------- //
+
+    // MARK: --------------- Delegates ----------------
     func textFieldDidBeginEditing(textField: UITextField) {
-        println("\(__FUNCTION__)")
+        if (self.DEBUG_ON) { app.printLogLine("\(__FUNCTION__)", fileName: "\(__FILE__)", lineNumber: (__LINE__)) }
         if (self.TEXTFIELD_TAG_BILL_AMT == textField.tag) {
             textField.text = ""
         }
     }
     func textFieldDidEndEditing(textField: UITextField) {
-        println("\(__FUNCTION__)")
+        if (self.DEBUG_ON) { app.printLogLine("\(__FUNCTION__)", fileName: "\(__FILE__)", lineNumber: (__LINE__)) }
         var amount:Double = self.MINIMUM_BILL_AMT
         
         if (self.TEXTFIELD_TAG_BILL_AMT == textField.tag) {
@@ -137,7 +145,7 @@ class GroupLunchViewController: UIViewController, UITextFieldDelegate, ADBannerV
         doCalculateAmounts()
     }
     func textFieldShouldReturn(textField: UITextField) -> Bool {
-        println("\(__FUNCTION__)")
+        if (self.DEBUG_ON) { app.printLogLine("\(__FUNCTION__)", fileName: "\(__FILE__)", lineNumber: (__LINE__)) }
         
         textField.resignFirstResponder()
         
@@ -145,29 +153,44 @@ class GroupLunchViewController: UIViewController, UITextFieldDelegate, ADBannerV
     }
     
     func bannerViewWillLoadAd(banner: ADBannerView!) {
-        println("\(__FUNCTION__)")
+        if (self.DEBUG_ON) { app.printLogLine("\(__FUNCTION__)", fileName: "\(__FILE__)", lineNumber: (__LINE__)) }
     }
     
     func bannerViewDidLoadAd(banner: ADBannerView!) {
-        println("\(__FUNCTION__)")
+        if (self.DEBUG_ON) { app.printLogLine("\(__FUNCTION__)", fileName: "\(__FILE__)", lineNumber: (__LINE__)) }
         self.adBanner.hidden = false
     }
     
     func bannerView(banner: ADBannerView!, didFailToReceiveAdWithError error: NSError!) {
-        println("\(__FUNCTION__)")
+        if (self.DEBUG_ON) { app.printLogLine("\(__FUNCTION__)", fileName: "\(__FILE__)", lineNumber: (__LINE__)) }
         println("Ad failed with error: %s", error.description)
         self.adBanner.hidden = true
     }
     
-    // --------------- Built Ins ---------------- //
+    // MARK: --------------- Built Ins ----------------
     override func touchesBegan(touches: NSSet, withEvent event: UIEvent) {
-        self.view.endEditing(true)
+        if (self.DEBUG_ON) { app.printLogLine("\(__FUNCTION__)", fileName: "\(__FILE__)", lineNumber: (__LINE__)) }
+        
+        var touch: UITouch = touches.anyObject() as UITouch
+        
+        if (touch.view.isKindOfClass(UIImageView)) {
+            let touchedView: UIImageView = touch.view as UIImageView
+            if (self.TAG_IMAGE_LOGO == touchedView.tag) {
+                performSegueWithIdentifier(SEGUE_ID_SUPPORT, sender: self)
+            }
+        }
+        
+        
+        
     }
     
     override func viewDidLoad() {
-        println("\(__FUNCTION__)")
+        if (self.DEBUG_ON) { app.printLogLine("\(__FUNCTION__)", fileName: "\(__FILE__)", lineNumber: (__LINE__)) }
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
+        
+        // AppDelegate
+        self.app                    = UIApplication.sharedApplication().delegate as AppDelegate
         
         // Set start amounts
         doSetInitialValues()
@@ -186,7 +209,7 @@ class GroupLunchViewController: UIViewController, UITextFieldDelegate, ADBannerV
     }
 
     override func didReceiveMemoryWarning() {
-        println("\(__FUNCTION__)")
+        if (self.DEBUG_ON) { app.printLogLine("\(__FUNCTION__)", fileName: "\(__FILE__)", lineNumber: (__LINE__)) }
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
